@@ -1,5 +1,13 @@
 .sideBar {
     width: 30vh;
     height: 100vh;
-    background-color: darkgray;
+    background-color: rgb(50, 50, 50);
+}
+
+.sideBarItem {
+    color: white;
+}
+
+.subItem {
+    display: none;
 }
