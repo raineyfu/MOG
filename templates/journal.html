@@ -2,10 +2,17 @@
 <html>
     <head>
         <!-- head definitions go here -->
+        <link rel="stylesheet" href="../static/css/journalstyle.css">
+        <script src="../static/js/journaljs.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     </head>
-    <body>
+    <body onload="initText()">
+        <button type="button" onclick="bold()">Bold</button>
         <div id="journal-container">
-            
+            <textarea id="journal-main" ></textarea>
+        
 
 
         </div>
