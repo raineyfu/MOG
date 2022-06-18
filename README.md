@@ -16,7 +16,7 @@ This application is incredibly scalable and is only limited by hard drive space.
 
 
 
-This app was built using HTML, Javascipt, and CSS as the front-end and Python was used for the backend. These technologies were for their simplicity. 
+This app was built using HTML, Javascipt, and CSS as the front-end and Python was used for the backend. These technologies were chosen for their simplicity. 
 
 For future development: 
 <br />
