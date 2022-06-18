@@ -72,11 +72,12 @@ def loginSubmit():
             json.dump(data, writeFile)
         return json.dumps("noUser")
 
-@app.route('/getJournalEntry', methods = ['GET'])
+@app.route('/getJournalEntry', methods = ['GET', 'POST'])
 def getJournalEntry():
     output = ""
     username = ""
-    if (request.method == "GET"):
+    if (request.method == "GET" or request.method == "POST"):
+        date = request.get_json()["date"]
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -87,14 +88,18 @@ def getJournalEntry():
             data = json.load(json_file)
             for person in data:
                 if (person["username"] == username):
-                    output = person["journal"]
-    return json.dumps(output)
+                    for journal in person["journals"]:
+                        if (journal["date"] == date):
+                            return json.dumps(journal)
+    return ({"title": "", "journal": ""})
 
 @app.route('/saveJournalEntry', methods = ['POST'])
 def saveJournalEntry():
     username = ""
     if (request.method == "POST"):
         journalInput = request.get_json()['input']
+        title = request.get_json()['title']
+        date = request.get_json()["date"]
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -105,10 +110,16 @@ def saveJournalEntry():
             data = json.load(json_file)
             for person in data:
                 if (person["username"] == username):
-                    person['journal'] = journalInput
+                    for journal in person["journals"]:
+                        if (journal["date"] == date):
+                            journal["journal"] = journalInput
+                            with open('journal.json', 'w') as writeFile:
+                                json.dump(data, writeFile)
+                                return json.dumps("")
+                    person["journals"].append({"date": date, "journal": journalInput, "title": title})
                     with open('journal.json', 'w') as writeFile:
-                        json.dump(data, writeFile)
-                        return json.dumps("")
+                                json.dump(data, writeFile)
+                                return json.dumps("")
     return json.dumps("") 
 
 @app.route('/saveJournalTitle', methods = ['POST'])
@@ -116,6 +127,8 @@ def saveJournalTitle():
     username = ""
     if (request.method == "POST"):
         journalInput = request.get_json()['input']
+        title = request.get_json()["title"]
+        date = request.get_json()["date"]
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -126,17 +139,24 @@ def saveJournalTitle():
             data = json.load(json_file)
             for person in data:
                 if (person["username"] == username):
-                    person['title'] = journalInput
+                    for journal in person["journals"]:
+                        if (journal["date"] == date):
+                            journal["title"] = journalInput
+                            with open('journal.json', 'w') as writeFile:
+                                json.dump(data, writeFile)
+                                return json.dumps("")
+                    person["journals"].append({"date": date, "journal": journalInput, "title": title})
                     with open('journal.json', 'w') as writeFile:
-                        json.dump(data, writeFile)
-                        return json.dumps("")
+                                json.dump(data, writeFile)
+                                return json.dumps("")
     return json.dumps("") 
 
-@app.route('/getJournalTitle', methods = ['GET'])
+@app.route('/getJournalTitle', methods = ['GET', "POST"])
 def getJournalTitle():
     output = ""
     username = ""
-    if (request.method == "GET"):
+    if (request.method == "GET" or request.method == "POST"):
+        date = request.get_json()["date"]
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -147,13 +167,15 @@ def getJournalTitle():
             data = json.load(json_file)
             for person in data:
                 if (person["username"] == username):
-                    output = person["title"]
+                    for journal in person["journals"]:
+                        if (journal["date"] == date):
+                            output = journal["title"]
     return json.dumps(output)
 
 
-@app.route('/getCurrentUser', methods=['GET'])
+@app.route('/getCurrentUser', methods=['GET', 'POST'])
 def getCurrentUser():
-    if (request.method == "GET"):
+    if (request.method == "GET" or request.method == "POST"):
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
