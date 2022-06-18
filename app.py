@@ -66,7 +66,8 @@ def loginSubmit():
                         return json.dumps("loginSuccess")
                     else:
                         return json.dumps("loginFailure")
-                person["login"] = "false"
+                else:
+                    person["login"] = "false"
 
         with open('login.json', 'w') as writeFile:
             json.dump(data, writeFile)
