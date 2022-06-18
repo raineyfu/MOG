@@ -48,7 +48,21 @@ def signup():
 
         data.append(newEntry)
 
+
         with open('login.json', 'w') as writeFile:
+            json.dump(data, writeFile)
+
+
+        newJournalEntry = {
+            "username": username,
+            "journals": [{"date": "2022-06-18", "journal": "", "title": ""
+            }]
+        }
+
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+        with open("journal.json", "w") as writeFile:
+            data.append(newJournalEntry)
             json.dump(data, writeFile)
         return json.dumps("success")
         
@@ -110,7 +124,6 @@ def saveJournalEntry():
             for person in data:
                 if (person["login"] == "true"):
                     username = person["username"]
-        print("username")
         with open("journal.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -121,11 +134,11 @@ def saveJournalEntry():
                             journal["title"] = title
                             with open('journal.json', 'w') as writeFile:
                                 json.dump(data, writeFile)
-                                return json.dumps("")
+                            return json.dumps("")
                     person["journals"].append({"date": date, "journal": journalInput, "title": title})
                     with open('journal.json', 'w') as writeFile:
                         json.dump(data, writeFile)
-                        return json.dumps("")
+                    return json.dumps("")
     return json.dumps("") 
 
 @app.route('/getJournalTitle', methods = ['GET', "POST"])
@@ -163,11 +176,14 @@ def getCurrentUser():
 @app.route('/logout', methods=['GET'])
 def logout():
     if (request.method == "GET"):
+        data = []
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
-                if (person["login"] == "true"):
-                    person["login"] = "false"
+                person["login"] = "false"
+        with open('login.json', 'w') as writeFile:
+            json.dump(data, writeFile)
+
         
         return json.dumps("")
         
