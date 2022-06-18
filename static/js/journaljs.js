@@ -107,6 +107,12 @@ async function logout() {
     });
 }
 
+function clearJournals() {
+    const myNode = document.getElementById("journals");
+    myNode.innerHTML = '';
+}
+
+
 function initJournals() {
     getJournalNames();
 }
@@ -139,6 +145,8 @@ async function getJournalNames() {
                     document.getElementById("dateInput").value = this.id;
                     console.log(this.id);
                     getJournalEntry();
+                    clearJournals();
+                    initJournals();
                 };
 
                 para.onmouseout  = function () {
