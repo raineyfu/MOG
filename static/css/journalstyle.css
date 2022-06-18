@@ -21,10 +21,9 @@ body {
 
 #sidebar {
     position:absolute;
-    height:85%;
+    height:80%;
     width:15%;
     margin-top: 75px;
-    border: thin solid green;
 }
 
 
@@ -67,7 +66,6 @@ body {
     position:absolute;
     width:100%;
     margin-top:12%;
-    border: thin solid black;
 }
 
 #bar {
@@ -77,6 +75,10 @@ body {
     right:11%;
     height:5px;
     border: thick solid black;
+}
+
+.hover {
+    color:#FF00FF;
 }
 
 textarea {

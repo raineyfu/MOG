@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
     </head>
-    <body onload="initText()">
+    <body onload="initText(), initJournals()">
         <div id="currentUser"> Current User: </div>
         <div id="logout"><button id="logout-button">Logout</button></div>
         <div id="sidebar">
@@ -24,7 +24,7 @@
 
         </div>
         <div id="title-container">
-            <input type="text" placeholder="Untitled Journal" id="title">
+            <input type="text" placeholder="Untitled Journal" id="title" maxlength="27">
         </div>
         <div id="journal-container">
             <textarea style="resize: none;" id="journal-main" ></textarea>

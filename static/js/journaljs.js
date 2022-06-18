@@ -107,6 +107,10 @@ async function logout() {
     });
 }
 
+function initJournals() {
+    getJournalNames();
+}
+
 async function getJournalNames() {
     const baseUrlPost = "http://127.0.0.1:5000/getJournalNames";
     const response = await fetch(baseUrlPost, {
@@ -116,10 +120,41 @@ async function getJournalNames() {
         },
     }).then(function(response) {
         response.json().then(function(data) {
-        
+            console.log(data);
+            
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i]['title']);
+                const para = document.createElement("p");
+                para.innerHTML = data[i]['title'];
+                document.getElementById("journals").appendChild(para);
+
+                para.setAttribute(
+                    'style',
+                    'width: 100%; border: thin solid black; border-radius: 10px;text-align:center;',
+                  );
+
+                para.setAttribute("id", data[i]['date']);
+
+                para.onclick = function () {
+                    document.getElementById("dateInput").value = this.id;
+                    console.log(this.id);
+                    getJournalEntry();
+                };
+
+                para.onmouseout  = function () {
+                    document.getElementById(this.id).class = "";
+                };
+
+                para.onmouseover = function () {
+                    document.getElementById(this.id).class = "hover";
+                };
+            }
+
+
         });
     });
 }
+
 
 function initText() {
     document.getElementById("journal-main").innerHTML = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";

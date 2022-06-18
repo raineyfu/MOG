@@ -196,11 +196,21 @@ def logout():
         
 @app.route('/getJournalNames', methods=["GET"])
 def getJournalNames():
+    username = ""
     if (request.method == "GET"):
         with open("login.json") as json_file:
             data = json.load(json_file)
             for person in data:
                 if (person["login"] == "true"):
+                    username = person["username"]
+
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+            print(username)
+            print(data)
+            for person in data:
+                if (person["username"] == username):
+                    print(person)
                     return json.dumps(person["journals"])
     return json.dumps([])
 if __name__ == "__main__":
