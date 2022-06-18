@@ -109,7 +109,46 @@ def saveJournalEntry():
                     with open('journal.json', 'w') as writeFile:
                         json.dump(data, writeFile)
                         return json.dumps("")
-    return json.dumps("")      
+    return json.dumps("") 
+
+@app.route('/saveJournalTitle', methods = ['POST'])
+def saveJournalTitle():
+    username = ""
+    if (request.method == "POST"):
+        journalInput = request.get_json()['input']
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    username = person["username"]
+                    
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["username"] == username):
+                    person['title'] = journalInput
+                    with open('journal.json', 'w') as writeFile:
+                        json.dump(data, writeFile)
+                        return json.dumps("")
+    return json.dumps("") 
+
+@app.route('/getJournalTitle', methods = ['GET'])
+def getJournalTitle():
+    output = ""
+    username = ""
+    if (request.method == "GET"):
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    username = person["username"]
+        
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["username"] == username):
+                    output = person["title"]
+    return json.dumps(output)
 if __name__ == "__main__":
   #initDetection()
   app.run()
