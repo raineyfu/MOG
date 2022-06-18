@@ -13,3 +13,16 @@ This application is incredibly scalable and is only limited by hard drive space.
 
 <img width="952" alt="0c82ee1f9165771d420dfd72bc144a41" src="https://user-images.githubusercontent.com/59759137/174459478-ee78ed1f-da78-40ad-8604-0bbf124d31df.png">
 <img width="959" alt="974147f8aebd43cfad552a9e6c8ffc7d" src="https://user-images.githubusercontent.com/59759137/174459524-4c0e24ff-92a5-4275-bb48-622453ea1856.png">
+
+
+
+This app was built using HTML, Javascipt, and CSS as the front-end and Python was used for the backend. These technologies were for their simplicity. 
+
+For future development: 
+<br />
+Add journal text styling
+<br />
+Task Planner
+<br />
+Journal Tags
+<br />
