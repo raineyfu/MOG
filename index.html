@@ -12,21 +12,33 @@
     <main>
         <div class="page">
             <div class="sideBar">
+
                 <div class="itemContainer">
                     <div id="taskList" class="sideBarItem">
                         &nbsp;
-                        <svg viewBox = "0 0 100 100" class="triangle"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
+                        <svg id ="taskArrow" viewBox = "0 0 100 100" class="triangle"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
                         &nbsp; Task List
                     </div>
                     <div class="subItem">&nbsp; &#8226; Board View</div>
                 </div>
-                <div class="sideBarItem"> 
-                    &nbsp; Journal
+
+                <div class="itemContainer">
+                    <div id="journal" class="sideBarItem"> 
+                        &nbsp; 
+                        <svg id="journalArrow" viewBox = "0 0 100 100" class="triangle"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
+                        &nbsp; Journal
+                    </div>
+                    <div class="subItem"> &nbsp; &#8226; All Entries</div>
                 </div>
                 <div class="sideBarItem">
                     &nbsp; Calendar
                 </div>
             </div> 
+            <div class="journalPage">
+                <form>
+                    <input id="journalName" class="journalInput" type="text" placeholder="Untitled">
+                </form>
+            </span>
         </div>
     </main>
 	<script src="scripts.js"></script>

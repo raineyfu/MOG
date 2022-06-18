@@ -6,11 +6,13 @@ body {
     width: 0.6875em;
     height: 0.6875em;
     fill: white;
+    transform: rotate(90deg);
 }
 .sideBar {
     width: 35vh;
     height: 100vh;
     background-color: rgb(50, 50, 50);
+    display: inline-block;
 }
 
 .sideBarItem {
@@ -39,12 +41,21 @@ body {
     background-color: rgb(70, 70, 70);
 }
 
+.journalPage {
+    display: inline-block;
+    height: 500px;
+    width: 500px;
+    position: relative;
+    background-color: black;
+}
 
 
 
 
 
-
+.rotate180 {
+    transform: rotate(180deg);
+}
 
 
 
@@ -52,7 +63,6 @@ body {
 	-webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-
 
 
 @-webkit-keyframes slide-bottom {
