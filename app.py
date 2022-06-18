@@ -121,7 +121,7 @@ def saveJournalTitle():
             for person in data:
                 if (person["login"] == "true"):
                     username = person["username"]
-                    
+
         with open("journal.json") as json_file:
             data = json.load(json_file)
             for person in data:
@@ -149,6 +149,29 @@ def getJournalTitle():
                 if (person["username"] == username):
                     output = person["title"]
     return json.dumps(output)
+
+
+@app.route('/getCurrentUser', methods=['GET'])
+def getCurrentUser():
+    if (request.method == "GET"):
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    return json.dumps(person["username"])
+    return json.dumps("")
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    if (request.method == "GET"):
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    person["login"] = "false"
+        
+        return json.dumps("")
+        
 if __name__ == "__main__":
   #initDetection()
   app.run()

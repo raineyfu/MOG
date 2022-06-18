@@ -64,6 +64,35 @@ async function saveJournalTitle() {
         });
     });
 }
+
+async function getCurrentUser() {
+    const baseUrlPost = "http://127.0.0.1:5000/getCurrentUser";
+    const response = await fetch(baseUrlPost, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(function(response) {
+        response.json().then(function(data) {
+            document.getElementById("currentUser").innerHTML = "Current User: " + data;
+        });
+    });
+}
+
+async function logout() {
+    const baseUrlPost = "http://127.0.0.1:5000/logout";
+    const response = await fetch(baseUrlPost, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(function(response) {
+        response.json().then(function(data) {
+            window.location.href = "http://127.0.0.1:5000/login";
+        });
+    });
+}
+
 function initText() {
     document.getElementById("journal-main").innerHTML = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
@@ -77,4 +106,9 @@ function initText() {
     document.getElementById("title").addEventListener("input", function(event) {
         saveJournalTitle();
     });
+
+    document.getElementById("logout").addEventListener("click", function(event) {
+        logout();
+    });
+    getCurrentUser();
 }
