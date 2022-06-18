@@ -107,6 +107,20 @@ async function logout() {
     });
 }
 
+async function getJournalNames() {
+    const baseUrlPost = "http://127.0.0.1:5000/getJournalNames";
+    const response = await fetch(baseUrlPost, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(function(response) {
+        response.json().then(function(data) {
+        
+        });
+    });
+}
+
 function initText() {
     document.getElementById("journal-main").innerHTML = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     document.getElementById("dateInput").value = "2022-06-18";
