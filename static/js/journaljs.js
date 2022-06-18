@@ -1,14 +1,19 @@
 
 async function getJournalEntry() {
     const baseUrlPost = "http://127.0.0.1:5000/getJournalEntry";
+    const inputJson = {
+        date: document.getElementById("dateInput").value
+    }
     const response = await fetch(baseUrlPost, {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
-        }
+        }, 
+        body: JSON.stringify(inputJson)
     }).then(function(response) {
         response.json().then(function(data) {
-            document.getElementById("journal-main").value = data;
+            document.getElementById("journal-main").value = data["journal"];
+            document.getElementById("title").value = data["title"];
         });
     });
 }
@@ -17,7 +22,9 @@ async function saveJournalEntry() {
     const baseUrlPost = "http://127.0.0.1:5000/saveJournalEntry";
 
     const inputJson = {
-        input: document.getElementById("journal-main").value
+        input: document.getElementById("journal-main").value,
+        title: document.getElementById("title").value,
+        date: document.getElementById("dateInput").value
     }
     const response = await fetch(baseUrlPost, {
         method: "POST",
@@ -34,11 +41,16 @@ async function saveJournalEntry() {
 
 async function getJournalTitle() {
     const baseUrlPost = "http://127.0.0.1:5000/getJournalTitle";
+
+    const inputJson = {
+        date: document.getElementById("dateInput").value
+    }
     const response = await fetch(baseUrlPost, {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
-        }
+        }, 
+        body: JSON.stringify(inputJson)
     }).then(function(response) {
         response.json().then(function(data) {
             document.getElementById("title").value = data;
@@ -51,7 +63,9 @@ async function saveJournalTitle() {
     const baseUrlPost = "http://127.0.0.1:5000/saveJournalTitle";
 
     const inputJson = {
-        input: document.getElementById("title").value
+        input: document.getElementById("journal-main").value, 
+        title: document.getElementById("title").value,
+        date: document.getElementById("dateInput").value
     }
     const response = await fetch(baseUrlPost, {
         method: "POST",
@@ -93,9 +107,23 @@ async function logout() {
     });
 }
 
+async function getJournalNames() {
+    const baseUrlPost = "http://127.0.0.1:5000/getJournalNames";
+    const response = await fetch(baseUrlPost, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then(function(response) {
+        response.json().then(function(data) {
+        
+        });
+    });
+}
+
 function initText() {
     document.getElementById("journal-main").innerHTML = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-
+    document.getElementById("dateInput").value = "2022-06-18";
     getJournalEntry();
     getJournalTitle();
 
@@ -109,6 +137,10 @@ function initText() {
 
     document.getElementById("logout").addEventListener("click", function(event) {
         logout();
+    });
+
+    document.getElementById("dateInput").addEventListener("change", function(event) {
+        getJournalEntry();
     });
     getCurrentUser();
 }
