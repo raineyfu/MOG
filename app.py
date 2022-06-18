@@ -17,6 +17,10 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/journal')
+def journal():
+    return render_template('journal.html')
+
 @app.route('/signupSubmit', methods = ['GET', 'POST'])
 def signup():
     if (request.method == "POST" or request.method == "GET"):
@@ -68,6 +72,44 @@ def loginSubmit():
             json.dump(data, writeFile)
         return json.dumps("noUser")
 
+@app.route('/getJournalEntry', methods = ['GET'])
+def getJournalEntry():
+    output = ""
+    username = ""
+    if (request.method == "GET"):
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    username = person["username"]
+        
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["username"] == username):
+                    output = person["journal"]
+    return json.dumps(output)
+
+@app.route('/saveJournalEntry', methods = ['POST'])
+def saveJournalEntry():
+    username = ""
+    if (request.method == "POST"):
+        journalInput = request.get_json()['input']
+        with open("login.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["login"] == "true"):
+                    username = person["username"]
+        print("username")
+        with open("journal.json") as json_file:
+            data = json.load(json_file)
+            for person in data:
+                if (person["username"] == username):
+                    person['journal'] = journalInput
+                    with open('journal.json', 'w') as writeFile:
+                        json.dump(data, writeFile)
+                        return json.dumps("")
+    return json.dumps("")      
 if __name__ == "__main__":
   #initDetection()
   app.run()
