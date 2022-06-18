@@ -124,8 +124,8 @@ def saveJournalEntry():
                                 return json.dumps("")
                     person["journals"].append({"date": date, "journal": journalInput, "title": title})
                     with open('journal.json', 'w') as writeFile:
-                                json.dump(data, writeFile)
-                                return json.dumps("")
+                        json.dump(data, writeFile)
+                        return json.dumps("")
     return json.dumps("") 
 
 @app.route('/getJournalTitle', methods = ['GET', "POST"])
