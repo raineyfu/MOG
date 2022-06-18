@@ -132,6 +132,9 @@ async function getJournalNames() {
                 console.log(data[i]['title']);
                 const para = document.createElement("p");
                 para.innerHTML = data[i]['title'];
+                if (para.innerHTML == '') {
+                    para.innerHTML = 'Untitled Journal';
+                }
                 document.getElementById("journals").appendChild(para);
 
                 para.setAttribute(
