@@ -21,6 +21,10 @@ def login():
 def journal():
     return render_template('journal.html')
 
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
+
 @app.route('/signupSubmit', methods = ['GET', 'POST'])
 def signup():
     if (request.method == "POST" or request.method == "GET"):
@@ -66,7 +70,8 @@ def loginSubmit():
                         return json.dumps("loginSuccess")
                     else:
                         return json.dumps("loginFailure")
-                person["login"] = "false"
+                else:
+                    person["login"] = "false"
 
         with open('login.json', 'w') as writeFile:
             json.dump(data, writeFile)
@@ -113,35 +118,7 @@ def saveJournalEntry():
                     for journal in person["journals"]:
                         if (journal["date"] == date):
                             journal["journal"] = journalInput
-                            with open('journal.json', 'w') as writeFile:
-                                json.dump(data, writeFile)
-                                return json.dumps("")
-                    person["journals"].append({"date": date, "journal": journalInput, "title": title})
-                    with open('journal.json', 'w') as writeFile:
-                                json.dump(data, writeFile)
-                                return json.dumps("")
-    return json.dumps("") 
-
-@app.route('/saveJournalTitle', methods = ['POST'])
-def saveJournalTitle():
-    username = ""
-    if (request.method == "POST"):
-        journalInput = request.get_json()['input']
-        title = request.get_json()["title"]
-        date = request.get_json()["date"]
-        with open("login.json") as json_file:
-            data = json.load(json_file)
-            for person in data:
-                if (person["login"] == "true"):
-                    username = person["username"]
-
-        with open("journal.json") as json_file:
-            data = json.load(json_file)
-            for person in data:
-                if (person["username"] == username):
-                    for journal in person["journals"]:
-                        if (journal["date"] == date):
-                            journal["title"] = journalInput
+                            journal["title"] = title
                             with open('journal.json', 'w') as writeFile:
                                 json.dump(data, writeFile)
                                 return json.dumps("")

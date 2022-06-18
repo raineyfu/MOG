@@ -167,7 +167,7 @@ function initText() {
     });
 
     document.getElementById("title").addEventListener("input", function(event) {
-        saveJournalTitle();
+        saveJournalEntry();
     });
 
     document.getElementById("logout").addEventListener("click", function(event) {
