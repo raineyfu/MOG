@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <meta http-equiv="Cache-control" content="NO-CACHE">
     <title>MOG Login</title>
  
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -111,12 +111,73 @@ button:hover {
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password">
 
-        <button id="login" onclick="submitForm()">Log In</button>
-        <button class="signup">Sign Up</button>
+        <button id="login" type="button" onclick="loginClick()">Log In</button>
+        <button class="signup" type="button" onclick="signup()">Sign Up</button>
     </form>
 
 
 </body>
+<script>
+    async function loginClick() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        const baseURLPost = "http://127.0.0.1:5000/loginSubmit";
+
+        const inputJson = {
+            username: username,
+            password: password
+        };
+
+        const response = await fetch(baseURLPost, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(inputJson),
+        }).then(function(response) {
+            response.json().then(function(data) {
+                console.log(data);
+                if (data == "noUser") {
+                    alert("Username is not Valid!");
+                } else if (data == "loginSuccess") {
+                    alert("Login was Successful!");
+                } else if (data == "loginFailure") {
+                    alert("Incorrect Password");
+                }
+            });
+        });
+    }
+
+    async function signup() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        const baseURLPost = "http://127.0.0.1:5000/signupSubmit";
+
+        const inputJson = {
+            username: username,
+            password: password
+        };
+
+        const response = await fetch(baseURLPost, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(inputJson),
+        }).then(function(response) {
+            response.json().then(function(data) {
+                if (data == "success") {
+                    alert("SignUp Successful!");
+                } else if (data == "userTaken") {
+                    alert("This Username is Taken!");
+                }
+            });
+        });
+    }
+
+</script>
 
 
 
