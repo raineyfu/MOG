@@ -142,6 +142,7 @@ button:hover {
                     alert("Username is not Valid!");
                 } else if (data == "loginSuccess") {
                     alert("Login was Successful!");
+                    window.location = "http://127.0.0.1:5000/journal";
                 } else if (data == "loginFailure") {
                     alert("Incorrect Password");
                 }
@@ -170,6 +171,7 @@ button:hover {
             response.json().then(function(data) {
                 if (data == "success") {
                     alert("SignUp Successful!");
+                    window.location = "http://127.0.0.1:5000/journal";
                 } else if (data == "userTaken") {
                     alert("This Username is Taken!");
                 }
