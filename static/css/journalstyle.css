@@ -34,9 +34,8 @@
 
 #date-container {
     position: absolute;
-    right:5%;
+    right:3%;
     margin-top: 75px;
-    border: thick solid red;
 }
 
 
@@ -45,7 +44,6 @@
     width:100%;
     font-size: 40px;
     text-align: center;
-    border: thick solid red;
 }
 
 
