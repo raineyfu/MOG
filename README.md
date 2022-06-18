@@ -1,5 +1,5 @@
 # MOG
-We've created a productivity web app that serves the dual purpose of being both a journal and a calendar, all in one. The website allows for the creation of individual user accounts all stored on a server, thus protecting the privacy of user journal entries. Each journal entry corresponds to a specific date, which the user can navigate to quickly using the date sidebar on the right. Journal entries can also be selected by clicking on journal titles on the left sidebar. 
+We've created a productivity web journal for users to document and track their daily routine, as well as take notes of important info and events. The website allows for the creation of individual user accounts all stored on a server, thus protecting the privacy of user journal entries. Each journal entry corresponds to a specific date, which the user can navigate to quickly using the date sidebar on the right. Journal entries can also be selected by clicking on journal titles on the left sidebar. 
 
 In order to access the web app, go to the link provided () and create an account. Then, log in with your account details and that's it! You now have access to a fully functional web journal that can store as many entries as you want, all easily navigable by title or by date. 
 
