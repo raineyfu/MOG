@@ -26,3 +26,6 @@ Task Planner
 <br />
 Journal Tags
 <br />
+
+
+BUG: cannot type too quickly, else edit journal.json and delete last extra ]
